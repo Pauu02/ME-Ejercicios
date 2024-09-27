@@ -40,7 +40,7 @@ pacientes_menores_40$nombre
 
 ingresos$T_ingreso <- as.numeric(difftime(ymd(ingresos$fecha_alta), ymd(ingresos$fecha_ingreso), units = "days"))
 
-format(ymd(ingresos$fecha_ingreso[5]), "%A")  # Día de la semana para el 5º ingreso
+format(ymd(ingresos$fecha_ingreso[5]), "%A")
 format(ymd(ingresos$fecha_ingreso[8]), "%A")
 
 union_df <- merge(pacientes, ingresos, by = "NHC")
