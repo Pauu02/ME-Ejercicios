@@ -40,7 +40,9 @@ pacientes_menores_40$nombre
 
 pacientes <- pacientes[order(pacientes$primer_apellido), ]
 
-ingresos$T_ingreso <- as.numeric(difftime(ymd(ingresos$fecha_alta), ymd(ingresos$fecha_ingreso), units = "days"))
+ingresos$fecha_ingreso <- ymd(ingresos$fecha_ingreso)
+ingresos$fecha_alta <- ymd(ingresos$fecha_alta)
+ingresos$T_ingreso <- as.integer(ingresos$fecha_alta - ingresos$fecha_ingreso)
 
 format(ymd(ingresos$fecha_ingreso[5]), "%A")
 format(ymd(ingresos$fecha_ingreso[8]), "%A")
