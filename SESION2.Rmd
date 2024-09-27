@@ -71,7 +71,7 @@ pacientes_menores_40$nombre
 ```
 l) Ordenamos el dataframe pacientes por orden alfabético en función del primer apellido.
 ```{r}
-
+pacientes <- pacientes[order(pacientes$primer_apellido), ]
 ```
 m) A partir de la fecha de ingreso y de alta, utilizando las funciones necesarias del paquete lubridate, calculamos una nueva variable, llamada T_ingreso, en el
 dataframe ingresos, que mide el tiempo (en días) que el paciente ha permanecido ingresado.
