@@ -76,7 +76,9 @@ pacientes <- pacientes[order(pacientes$primer_apellido), ]
 m) A partir de la fecha de ingreso y de alta, utilizando las funciones necesarias del paquete lubridate, calculamos una nueva variable, llamada T_ingreso, en el
 dataframe ingresos, que mide el tiempo (en días) que el paciente ha permanecido ingresado.
 ```{r}
-ingresos$T_ingreso <- as.numeric(difftime(ymd(ingresos$fecha_alta), ymd(ingresos$fecha_ingreso), units = "days"))
+ingresos$fecha_ingreso <- ymd(ingresos$fecha_ingreso)
+ingresos$fecha_alta <- ymd(ingresos$fecha_alta)
+ingresos$T_ingreso <- as.integer(ingresos$fecha_alta - ingresos$fecha_ingreso)
 ```
 n) Indicamos qué día de la semana se realizaron el 5º y 8º ingresos respectivamente.
 ```{r}
