@@ -38,6 +38,8 @@ edad
 pacientes_menores_40 <- subset(pacientes, "edad"<40)
 pacientes_menores_40$nombre
 
+pacientes <- pacientes[order(pacientes$primer_apellido), ]
+
 ingresos$T_ingreso <- as.numeric(difftime(ymd(ingresos$fecha_alta), ymd(ingresos$fecha_ingreso), units = "days"))
 
 format(ymd(ingresos$fecha_ingreso[5]), "%A")
