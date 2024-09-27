@@ -26,7 +26,9 @@ str(ingresos)
 ```
 e) Convertimos a factor la variable sexo del dataframe pacientes.
 ```{r}
-
+if (!is.factor(pacientes$sexo)) {
+  pacientes$sexo <- as.factor(pacientes$sexo)
+}
 ```
 f) Analizamos el contenido de los dataframes.
 ```{r}
@@ -43,15 +45,15 @@ pacientes[c(3,7) , c("nombre", "sexo", "peso", "altura")]
 h) Encontramos los pesos máximos y mínimos registrados en el fichero pacientes e
 indicamos el NHC de los pacientes que presentaban esos valores.
 ```{r}
-min(pacientes$peso)
-max(pacientes$peso)
-which.min(pacientes$NHC)
-which.max(pacientes$NHC)
+peso_max <- max(pacientes$peso, na.rm = TRUE)
+peso_min <- min(pacientes$peso, na.rm = TRUE)
+pacientes[pacientes$peso == peso_max, "NHC"]
+pacientes[pacientes$peso == peso_min, "NHC"]
 ```
 i) Calculamos una nueva variable, llamada IMC, para cada uno de los pacientes
 estudiados y la añadimos al dataframe pacientes.
 ```{r}
-IMC<-pacientes$peso/((pacientes$altura)/100)**2
+pacientes$IMC/((pacientes$altura)/100)**2
 ```
 j) Determinamos la edad de los pacientes haciendo uso de las funciones necesarias del paquete lubridate y añadimos una nueva columna, llamada Edad, al dataframe
 pacientes.
@@ -64,7 +66,8 @@ edad
 ```
 k) Mostramos los nombres de los pacientes menores de 40 años.
 ```{r}
-
+pacientes_menores_40 <- subset(pacientes, "edad"<40)
+pacientes_menores_40$nombre
 ```
 l) Ordenamos el dataframe pacientes por orden alfabético en función del primer apellido.
 ```{r}
@@ -73,23 +76,33 @@ l) Ordenamos el dataframe pacientes por orden alfabético en función del primer
 m) A partir de la fecha de ingreso y de alta, utilizando las funciones necesarias del paquete lubridate, calculamos una nueva variable, llamada T_ingreso, en el
 dataframe ingresos, que mide el tiempo (en días) que el paciente ha permanecido ingresado.
 ```{r}
-
+ingresos$T_ingreso <- as.numeric(difftime(ymd(ingresos$fecha_alta), ymd(ingresos$fecha_ingreso), units = "days"))
 ```
 n) Indicamos qué día de la semana se realizaron el 5º y 8º ingresos respectivamente.
 ```{r}
-
+format(ymd(ingresos$fecha_ingreso[5]), "%A")
+format(ymd(ingresos$fecha_ingreso[8]), "%A")
 ```
 o) Unimos los dos dataframes y mostramos el contenido del dataframe resultante.
 ```{r}
-
+union_df <- merge(pacientes, ingresos, by = "NHC")
+head(union_df)
 ```
 p) ¿A qué servicio fueron derivados, en su ingreso, los pacientes con valores de
 peso máximo y mínimo obtenidos en el apartado h)?
-
+```{r}
+servicio_peso_max <- union_df[union_df$peso == peso_max, "servicio"]
+servicio_peso_min <- union_df[union_df$peso == peso_min, "servicio"]
+servicio_peso_max
+servicio_peso_min
+```
 q) Añadimos un nuevo registro (una nueva fila) al dataframe unión de los dos
 anteriores (comando rbind()).
 ```{r}
-
+nuevo_registro <- data.frame(NHC = 9999, nombre = "Nuevo Paciente", sexo = "F", peso = 70, altura = 165, 
+                             fecha_nacimiento = "1985-06-15", IMC = 25.7, Edad = 39, 
+                             fecha_ingreso = "2024-01-15", fecha_alta = "2024-01-25", 
+                             servicio = "Cardiología", T_ingreso = 10)
+union_df <- rbind(union_df, nuevo_registro)
+tail(union_df)
 ```
-
-
