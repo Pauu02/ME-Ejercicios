@@ -1,0 +1,61 @@
+---
+title: "SESION1"
+output: word_document
+date: "2024-09-17"
+---
+Para empezar comprobamos los paquetes presentes en el entorno de trabajo.
+```{r}
+search()
+```
+En caso de que no estuviera instalada la librería ggplot2 debemos instalarla.
+```{r}
+if (!require(ggplot)) install.packages("ggplot2")
+```
+A continuación visualizaremos la información sobre este package. En esta información se muestra el nombre del paquete, la versión, los autores y, en el apartado Index, las distintas funciones y conjuntos de datos que componen este paquete.
+```{r}
+library(ggplot2)
+library(help=ggplot2)
+```
+Podemos obtener más información de cada una de esas funciones o conjuntos de datos. Así, por ejemplo, con help(diamonds) obtendremos información más detallada de "diamonds".
+```{r}
+help(diamonds)
+```
+Asignamos este conjunto de datos a la variable data.
+```{r}
+data<-diamonds
+```
+Visualizamos el contenido del objeto que acabamos de crear en un formato de hoja de cálculo.
+```{r}
+View(data)
+```
+Mostramos información en la consola sobre los primeros y los últimos diamantes.
+```{r}
+head(data)
+tail(data)
+```
+Podemos ver la estructura o tipo de cada variable. Observamos que hay un total de 10 variables (3 factores ordenados, un entero y 6 variables numéricas). Un factor ordenado organiza los valores categóricos en orden de menor a mayor. Por ejemplo, hay 5 categorías de cortes de diamantes, siendo "Fair" el grado de corte más bajo e “Ideal” el grado más alto.
+```{r}
+str(data)
+```
+Mostraremos el nombre de las variables.
+```{r}
+names(data)
+```
+Accedemos a la variable “price” y mostramos los precios de todos los diamantes del conjunto de datos.
+```{r}
+data$price
+```
+Mostramos el precio del diamante de la fila 270 y el precio de los diamantes que sean superior a 18000 USD$
+```{r}
+data$price[270]
+data$price[data$price > 18000]
+```
+Calculamos el precio medio de todos los diamantes y el máximo número de caras talladas de los diamantes.
+```{r}
+mean(data$price)
+max(data$carat)
+```
+Por último, creamos un histograma del precio de los diamantes.
+```{r}
+hist(data$price)
+```

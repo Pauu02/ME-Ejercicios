@@ -1,0 +1,95 @@
+---
+title: "SESION2"
+output: word_document
+date: "2024-09-24"
+---
+a) Para empezar leemos los ficheros “pacientes.txt” y “ingresos.txt”, que contienen los datos de algunos pacientes y de diferentes ingresos en un hospital.
+```{r}
+setwd("C:/Users/Entrar/Desktop/Data_Labs_R")
+pacientes<-read.table("pacientes.txt",sep = "\t", header=T)
+ingresos<-read.table("ingresos.txt",sep = "\t", header = T)
+```
+b) Obtenemos cuántos casos y cuantas variables hay en cada fichero.
+```{r}
+dim(pacientes)
+dim(ingresos)
+```
+c) Comprobamos los nombres de las variables de ambos dataframes.
+```{r}
+names(pacientes)
+names(ingresos)
+```
+d) Comprobamos que los tipos de datos que integran ambos dataframes son los apropiados para cada variable.
+```{r}
+str(pacientes)
+str(ingresos)
+```
+e) Convertimos a factor la variable sexo del dataframe pacientes.
+```{r}
+
+```
+f) Analizamos el contenido de los dataframes.
+```{r}
+head(pacientes)
+head(ingresos)
+tail(pacientes)
+tail(ingresos)
+```
+g) Obtener los valores de las variables nombre, sexo, peso, altura, para el 3º
+y 7º paciente.
+```{r}
+pacientes[c(3,7) , c("nombre", "sexo", "peso", "altura")]
+```
+h) Encontramos los pesos máximos y mínimos registrados en el fichero pacientes e
+indicamos el NHC de los pacientes que presentaban esos valores.
+```{r}
+min(pacientes$peso)
+max(pacientes$peso)
+which.min(pacientes$NHC)
+which.max(pacientes$NHC)
+```
+i) Calculamos una nueva variable, llamada IMC, para cada uno de los pacientes
+estudiados y la añadimos al dataframe pacientes.
+```{r}
+IMC<-pacientes$peso/((pacientes$altura)/100)**2
+```
+j) Determinamos la edad de los pacientes haciendo uso de las funciones necesarias del paquete lubridate y añadimos una nueva columna, llamada Edad, al dataframe
+pacientes.
+```{r}
+library(lubridate)
+duracion <- interval ( dmy(pacientes$fechnac), as.Date(now()) )
+Periodo_tiempo <- as.period (duracion)
+edad <- year (Periodo_tiempo)
+edad
+```
+k) Mostramos los nombres de los pacientes menores de 40 años.
+```{r}
+
+```
+l) Ordenamos el dataframe pacientes por orden alfabético en función del primer apellido.
+```{r}
+
+```
+m) A partir de la fecha de ingreso y de alta, utilizando las funciones necesarias del paquete lubridate, calculamos una nueva variable, llamada T_ingreso, en el
+dataframe ingresos, que mide el tiempo (en días) que el paciente ha permanecido ingresado.
+```{r}
+
+```
+n) Indicamos qué día de la semana se realizaron el 5º y 8º ingresos respectivamente.
+```{r}
+
+```
+o) Unimos los dos dataframes y mostramos el contenido del dataframe resultante.
+```{r}
+
+```
+p) ¿A qué servicio fueron derivados, en su ingreso, los pacientes con valores de
+peso máximo y mínimo obtenidos en el apartado h)?
+
+q) Añadimos un nuevo registro (una nueva fila) al dataframe unión de los dos
+anteriores (comando rbind()).
+```{r}
+
+```
+
+
