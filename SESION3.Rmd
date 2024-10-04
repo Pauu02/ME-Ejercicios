@@ -1,0 +1,55 @@
+---
+title: "SESION3"
+output: html_document
+date: "2024-10-01"
+---
+Programamos una función que genera números aleatorios entre cero y uno
+hasta que la suma de los números generados supera por primera vez el valor de
+3. La función retorna la cantidad de números aleatorios generados para que se cumpla la condición.
+```{r} 
+generar_numeros_aleatorios <- function() {
+  suma <- 0
+  contador <- 0
+  
+  while (suma <= 3) {
+    numero_aleatorio <- runif(1)  
+    suma <- suma + numero_aleatorio
+    contador <- contador + 1
+  }
+  
+  return(contador)
+}
+
+resultado <- generar_numeros_aleatorios()
+print(resultado)
+```
+Instamos tidyverse si no está ya instalado
+```{r} 
+if (!requireNamespace("tidyverse", quietly = TRUE)) {
+  install.packages("tidyverse")
+}
+```
+Cargamos la librería
+```{r} 
+library(tidyverse)
+```
+Definimos la URL
+```{r} 
+url <- "https://data.un.org/_Docs/SYB/CSV/SYB65_1_202209_Population,%20Surface%20Area%20and%20Density.csv"
+```
+
+```{r} 
+
+```
+
+```{r} 
+
+```
+
+```{r} 
+
+```
+
+```{r} 
+
+```
